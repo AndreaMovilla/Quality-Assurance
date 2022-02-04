@@ -33,9 +33,9 @@ This package was created using Python 3.7 in the integrated development environm
 
 	Before running, it’s important to organize the directories as follows:
 
-	directory_to_static_image/PET (containing static image)
+	directory_to_image_without_movement/PET (containing without movement image)
 	
-	directory_to_static_image/Reference_segmentations (containing segmentations based on static image)
+	directory_to_image_without_movement/Reference_segmentations (containing segmentations based on image without movement)
 
  
 	directory_to_images/PET (containing images to analyse)
