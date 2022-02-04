@@ -26,6 +26,7 @@ This package was created using Python 3.7 in the integrated development environm
 	-QA_Volumes.py: script to perform volume quantification analysis. Given reference segmentations and images of moving and static studies, it provides 		volume segmentations obtained with a growing region algorithm. Creates and XLSX file with the volumes (in ml) of each segmentation and the recovery 		coefficient of said volumes (RC=Vol_moving/Vol_static).
 
 	-QA_Activity.py: script to perform activity concentration quantification analysis. Given reference segmentations and images for moving and static studies, 	   it provides the activity concentration of each segmentation and its recovery coefficient (RC=A_moving/A_static)
+	
 
 	-QA_Resolution.py: script to perform resolution quantification analysis. Given one-plane reference segmentations of rod sectors , and images for moving and 	    static studies, it provides the contrast (C) of each sector and the number of rods recovery coefficient (RC=Rods_moving/Rods_static)
 
@@ -44,3 +45,4 @@ This package was created using Python 3.7 in the integrated development environm
 
 	To run ‘Quantification_analysis’: Install requirements.txt. Open and run Quantification_Analysis.py. An emergent window will appear. It will ask you to 	choose the type of analysis desired: volume, activity or resolution. Another emergent window will appear, asking for the input needed for the type of 		quantification chosen. After adding the input click “run”. It will automatically create in the script directory an output folder with the results obtained.
 	
+	![mermaid-diagram-20220204144826](https://user-images.githubusercontent.com/86127817/152547245-620c94a4-31cf-4d10-9a53-72a047c57a1a.png)
