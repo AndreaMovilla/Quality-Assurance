@@ -1,5 +1,17 @@
 # Quality-Assurance
-Test repository for Quality Assurance
+Test repository for Quality Assurance                                         
+————————————————————————————————————————————————————————————
+— - - https://github.com/AndreaMovilla/Quality-Assurance - - - 
+> A package containing tools for automatic quantification analysis of PET images.
+————————————————————————————————————————————————————————————
+REFERENCES:
+
+————————————————————————————————————————————————————————————
+AUTHOR: Andrea Martínez Movilla <movillandrea@gmail.com>
+————————————————————————————————————————————————————————————
+HISTORY:
+Version 1.0: February 2022
+————————————————————————————————————————————————————————————
 
 This package was created using Python 3.7 in the integrated development environment PyCharm. It contains 2 folders:
 
