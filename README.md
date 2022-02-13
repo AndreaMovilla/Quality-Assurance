@@ -68,4 +68,5 @@ This package was created using Python 3.7 in the integrated development environm
 
 	To run ‘Quantification_analysis’: Install requirements.txt. Open and run Quantification_Analysis.py. An emergent window will appear. It will ask you to 	choose the type of analysis desired: volume, activity or resolution. Another emergent window will appear, asking for the input needed for the type of 		quantification chosen. After adding the input click “run”. It will automatically create in the script directory an output folder with the results obtained.
 	
-	![mermaid-diagram-20220204144826](https://user-images.githubusercontent.com/86127817/152547245-620c94a4-31cf-4d10-9a53-72a047c57a1a.png)
+	![mermaid-diagram-20220213192235](https://user-images.githubusercontent.com/86127817/153769030-5d4738a1-24ae-4eaa-8f5b-087c815e92df.png)
+
