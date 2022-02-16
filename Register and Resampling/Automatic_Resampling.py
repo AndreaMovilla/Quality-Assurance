@@ -71,6 +71,6 @@ e1.grid(row=0, column=1)
 e2.grid(row=1, column=1)
 
 
-tk.Button(master, text='Run', command=mycode()).grid(row=6, column=1, sticky=tk.W, pady=4)
+tk.Button(master, text='Run', command=mycode).grid(row=6, column=1, sticky=tk.W, pady=4)
 
 tk.mainloop()
