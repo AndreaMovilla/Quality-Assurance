@@ -27,17 +27,9 @@ def mycode():
     import QA_functions as QA_functions
     import ARR_functions as ARR_functions
 
-    root = tk.Tk()
-    root.withdraw()
     #  Import data
     global analysis, reference, master
-
-
-
-
-    root = tk.Tk()
-    root.withdraw()
-
+    
     path_fixed_image = reference.selected_file  # path to reference registered image
     path_segmentations_folder = analysis.selected_directory  # path to segmentations we want to resample
     master.destroy()
