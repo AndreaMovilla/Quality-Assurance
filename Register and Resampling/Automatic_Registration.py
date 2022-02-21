@@ -33,7 +33,6 @@ def mycode():
     root.withdraw()
     #  Import data
     global analysis, reference, master
-    master.destroy()
     path_fixed_image = reference.selected_file  # path to fixed image
     path_moving_images_folder = analysis.selected_directory  # images we want to register
     master.destroy()
@@ -67,6 +66,6 @@ e1.grid(row=0, column=1)
 e2.grid(row=1, column=1)
 
 
-tk.Button(master, text='Rum', command=mycode).grid(row=6, column=1, sticky=tk.W, pady=4)
+tk.Button(master, text='Run', command=mycode).grid(row=6, column=1, sticky=tk.W, pady=4)
 
 tk.mainloop()
