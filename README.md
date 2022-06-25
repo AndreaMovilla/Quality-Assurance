@@ -73,9 +73,9 @@ This package was created using Python 3.7. It contains 2 folders:
 
 	- Automatic_resampling.py: Script to perform a basic automatic resampling of segmentations contained in a specific folder. 
 
-	To run  ‘Automatic registration and resampling’: Install requirements.txt, for example, using pip.
+	To run  ‘Automatic registration and resampling’: Install requirements.txt, for example, using pip:
 	
-	>$ pip install -r requirements.txt
+	$ pip install -r requirements.txt`
 	
 	Open Register_Resampling.py. An emergent window will appear, asking the user to choose between register and resampling. Another emergent window will appear, asking for the directories needed for the type of analysis chosen. An output folder with the registered images or resampled segmentations will appear in the script folder.
 
