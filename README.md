@@ -1,11 +1,12 @@
 # Quality-Assurance
                                       
----
 
 — - - https://github.com/AndreaMovilla/Quality-Assurance - - - 
 
-> A package containing tools for automatic quantification analysis of PET images.
-> 
+> A package containing tools for automatic quantification analysis of NRRD PET images.
+
+Quality_Assurance.py performs an analysis of the quality of PET images compared to a reference image. The quality can be assessed in terms of volume accuracy, activity concentration accuracy and spatial resolution. This docuement gives a quick overview of the structure of the package. A detailed explanation of the quality metrics, requirements and instruction can be found in the "Aditional Documentation" file.
+
 ---
 
 REFERENCES:
@@ -56,7 +57,7 @@ end
 ```
 
 
-The code on this repository is organized in four blocks: User inputs, Register and Resampling, Folder organisation and Quality Assurance. On User inputs the neccesary images to run the package are described. Register and Resampling explains the use of the input images to run Register_Resampling.py. Folder organisation shows the necesary organisation of the images used in the next block, Quality assurance, where PET image quality analysis is explained. The dotted lines represent the inputs of Register and resampling, while the solid lines represent the inputs of Quality assurance. Everything is explained in the file called "Aditional documentation".
+The workflow of this repository is organized in four blocks: User inputs, Register and Resampling, Folder organisation and Quality Assurance. Everything is explained in sections in the file called "Aditional documentation". On the User inputs section the neccesary images to run the package are described. Register and Resampling explains the use of the input images to run Register_Resampling.py. Folder organisation shows the necesary organisation of the images used in the next block, Quality assurance, where PET image quality analysis is explained. The dotted lines represent the inputs of Register and resampling, while the solid lines represent the inputs of Quality assurance.
 
 This package was created using Python 3.7. It contains 2 folders:
 
@@ -66,26 +67,25 @@ This package was created using Python 3.7. It contains 2 folders:
 
 	- ARR_funtions.py: file containing all the functions used in the scripts of this folder.
 
-	- Automatic_registration.py: Script to perform a basic automatic registration of images contained in a specific 	folder. Given reference fixed image and 	folder of moving images, it provides registered moving images and the 	transforms used for each one of them. 
+	- Automatic_registration.py: Script to perform a basic automatic registration of images contained in a specific folder. 
 
-	- Automatic_resampling.py: Script to perform a basic automatic resampling of segmentations contained in a specific folder. Given already registered image and 	     folder of segmentations, it provides resampled 	segmentations.
+	- Automatic_resampling.py: Script to perform a basic automatic resampling of segmentations contained in a specific folder. 
 
-	To run  ‘Automatic registration and resampling’: Install requirements.txt. Open R&R.py. An emergent window will appear, asking the user to choose between 	  register and resampling. Another emergent window will appear, asking for the directories needed for the type of analysis chosen. An output folder with the 	     registered images or resampled segmentations will appear in the script folder. All images must be in NRRD format.
+	To run  ‘Automatic registration and resampling’: Install requirements.txt. Open Register_Resampling.py. An emergent window will appear, asking the user to choose between register and resampling. Another emergent window will appear, asking for the directories needed for the type of analysis chosen. An output folder with the registered images or resampled segmentations will appear in the script folder.
 
 
 
-2. ‘Quantification_Analysis’: Python codes to perform volume, activity concentration and resolution quantification analysis of several PET images at once. 
+2. ‘Quantification_Analysis’: Python scripts to perform volume, activity concentration and resolution quantification analysis of several PET images at once. 
 	
 	- Quality_Assurance.py: script that runs the type of quantification desired.
 
 	- QA_functions.py: file containing all the functions used in the scripts of this folder.
 	
-	- QA_Volumes.py: script to perform volume quantification analysis. Given reference segmentations and images of moving and static studies, it provides 		volume segmentations obtained with a growing region algorithm. Creates and XLSX file with the volumes (in ml) of each segmentation and the recovery 		coefficient of said volumes ($RC_{VA}=\frac{Vol_{moving}}{Vol_{static}}$).
+	- QA_Volumes.py: script to perform volume quantification analysis. 
 
-	- QA_Activity.py: script to perform activity concentration quantification analysis. Given reference segmentations and images for moving and static studies, 	   it provides the activity concentration of each segmentation and its recovery coefficient ($RC_{CA}=\frac{A_{moving}}{A_{static}}$)
-	
+	- QA_Activity.py: script to perform activity concentration quantification analysis. 
 
-	- QA_Resolution.py: script to perform resolution quantification analysis. Given one-plane reference segmentations of rod sectors , and images for moving and 	    static studies, it provides the contrast (C) of each sector and the number of rods recovery coefficient ($RC_R=\frac{Rods_{moving}}{Rods_{static}}$)
+	- QA_Resolution.py: script to perform resolution quantification analysis. 
 
 
 	Before running, it’s important to organize the directories as follows:
