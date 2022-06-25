@@ -5,7 +5,9 @@
 
 > A package containing tools for automatic quantification analysis of NRRD PET images.
 
-Quality_Assurance.py performs an analysis of the quality of PET images compared to a reference image. The quality can be assessed in terms of volume accuracy, activity concentration accuracy and spatial resolution. This docuement gives a quick overview of the structure of the package. A detailed explanation of the quality metrics, requirements and instruction can be found in the "Aditional Documentation" file.
+Quality_Assurance.py performs an analysis of the quality of PET images compared to a reference image. 
+
+The quality can be assessed in terms of volume accuracy, activity concentration accuracy and spatial resolution. This document gives a quick overview of the structure of the package. A detailed explanation of the quantification analysis and instructions can be found in the "Aditional Documentation" file.
 
 ---
 
