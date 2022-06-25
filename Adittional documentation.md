@@ -22,7 +22,7 @@ graph LR
     B-.-C
     E-.-D
     C-->1[Resampled segmentations]
-    D-->2[Registered images to analyze]
+    D-->2[Registered images to analyse]
     B-->F
     A -->F["PET <br> Reference_segmentations <br> (Without movement movement image and segmentations)"]
     F-->G[Volume<br> Activity concentration <br> Spatial resolution]
@@ -36,16 +36,16 @@ graph LR
     subgraph Register_Resampling.py
     C & D & 1 & 2
     end
-    subgraph Folder organization
+    subgraph Folder organisation
     F & H
     end
     subgraph Quality Assurance.py
     G
     end
 ```
-The project contains four blocks: User inputs, Register and Resampling, Folder organization and Quality Assurance. 
+The project contains four blocks: User inputs, Register and Resampling, Folder organisation and Quality Assurance. 
 On User inputs the neccesary images to run the package are described. Register and Resampling explains the use of the
-input images to run Register_Resampling.py. Folder organization shows the necesary organization of the images used in 
+input images to run Register_Resampling.py. Folder organisation shows the necesary organisation of the images used in 
 the next block, Quality assurance, where PET image quality analysis is explained. The dotted lines represent the inputs
 of Register and resampling, while the solid lines represent the inputs of Quality assurance.
 # Input requirements
@@ -85,7 +85,7 @@ For both types of analysis, a window will appear asking for:
  - Image directory (reference image for register/analysis image for resampling)
 
  - Register or resampling folder directory (PET for register/Reference_segmentations for resampling)
-
+## Folder organisation
 All the images and segmentations must be in NRRD format. For the analysis ahead, the images must be filed as follows:
 ```mermaid
 graph TD;
@@ -125,8 +125,8 @@ voxels inside the segmentation [2-4]. The threshold value used is the 40% of the
 intensity higher than the 70% of the maximum intensity. The seed of the region growing algorithm is the voxel with
 highest intensity of the segmentation.
 
+![fig3_nueva](https://user-images.githubusercontent.com/86127817/175782237-122fac9f-05b4-4d09-a734-f0553adaafff.png)
 
-<img src="/Users/andreamovilla/Documents/graficaspaper/submission_paper/fig3_nueva.png"/>
 
 
 The new segmentation is then saved as a NRRD file with the name format:
