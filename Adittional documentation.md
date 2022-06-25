@@ -58,7 +58,7 @@ of Register and Resampling, while the solid lines represent the inputs of Qualit
 
  -  Any number of images to analyse.
 
-All the images and segmentations must be in NRRD format. For our application we used an image taken without phantom movement as the reference image,
+All the images and segmentations must be in NRRD format. For our application we used an image acquired without phantom movement as the reference image,
 six reference segmentations and several tens of motion compensated images for each quantification analysis.
 
 
