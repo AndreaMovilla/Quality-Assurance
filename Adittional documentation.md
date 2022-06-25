@@ -137,9 +137,9 @@ highest intensity inside the segmentation.
 
 
 The new segmentation is then saved as a NRRD file with the name format:
-
+```
 TS_nameofsegmentation_nameofimage.nrrd
-
+```
 Its volume is also calculated and used to obtain the  volume recovery coefficient (RC<sub>VA</sub>), which is:
 
 
@@ -147,14 +147,14 @@ Its volume is also calculated and used to obtain the  volume recovery coefficien
 
 
 The script will compute the RC<sub>VA</sub> for all original segmentations and all N images to analyse. Volumes and
-RC<sub>VA</sub> will be saved in an excel file. In our application, we used six manual reference segmentations around the six spheres
+RC<sub>VA</sub> will be saved in an Excel file. In our application, we used six manual reference segmentations around the six spheres
 of the NEMA IEC body phantom to obtain the final sphere segmentations and compare their volume in the motion compensated images
 to the volume in the reference image through RC<sub>VA</sub>. 
 
 # Activity concentration quantification
 
 The script will obtain the mean intensity value and standard deviation (STD) of each reference segmentation, for the reference
-image and the N images to analise. It will correct the intensity by the activity decay and then compute the activity
+image and the N images to analyse. It will correct the intensity by the activity decay and then compute the activity
 concentration recovery coefficient (RC<sub>VA</sub>):
 
 ![](https://latex.codecogs.com/svg.image?{\color{black}&space;Constrast&space;=&space;\frac{I_{analysis}}{I_{reference}})
@@ -174,7 +174,9 @@ The script will use each segmentation to calculate the mean intensity of two thr
 It will save the Background as a segmentation and calculate the number of clusters (rods) in it. Each of the segmentations
 will be named as follows:
 
+```
 BG_nameofsegmentation_nameofimage.nrrd
+```
 
 The script will calculate the number of rods recovery coefficient (RC<sub>R</sub>) and contrast:
 
