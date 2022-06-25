@@ -44,8 +44,8 @@ graph LR
     G
     end
 ```
-The workflow contains four blocks: User inputs, Register and Resampling, Folder organization and Quality Assurance. 
-On User inputs the necessary images to run the package are described. Register and Resampling explains the use of the
+The workflow contains four blocks: User inputs, Register and Resampling, Folder organization and Quality Assurance. The blocks are explained in sections.
+On the User inputs section the necessary images to run the package are described. Register and Resampling explains the use of the
 input images to run Register_Resampling.py. Folder organization shows the necessary organization of the images used in 
 the next block, Quality Assurance, where PET image quality analysis is explained. The dotted lines represent the inputs
 of Register and Resampling, while the solid lines represent the inputs of Quality Assurance. 
@@ -81,7 +81,7 @@ style E fill:#00,stroke:#333,stroke-width:0px
 Register and Resampling is the previous step to Quality Assurance. Register_Resampling.py
 is first used to register the N images to analyse to the reference image (register option). If the images have different
 size than the reference image, then the segmentations must be resampled to one of the images to analise (resampling option).
-With Register_Resampling.py an emergent window will appear asking the user to choose between Register ans Resampling options. 
+With Register_Resampling.py an emergent window will appear asking the user to choose between Register and Resampling options. 
 Then it will run the script for the option chosen, Automatic_registration.py or Automatic_resampling.py. For both scripts,
 a window will appear asking for:
 
@@ -89,7 +89,7 @@ a window will appear asking for:
 
  - Register or resampling folder directory (PET for register/Reference_segmentations for resampling)
 
-The functions needed to run the scripts are un QA_functions.py and ARR_functions.py.
+The functions needed to run the scripts are in QA_functions.py and ARR_functions.py.
 ## Folder organisation
 All the images and segmentations must be in NRRD format. For the analysis ahead, the images must be filed as follows:
 ```mermaid
@@ -109,18 +109,18 @@ style E fill:#00,stroke:#333,stroke-width:0px
 style F fill:#00,stroke:#333,stroke-width:0px
 ```
 While the reference and analysis folder can have any name desired, the PET and Reference_segmentations folders must be named as stated.
-## Quality assurance
+## Quality Assurance
 With Quality_Assurance.py the user can choose between volume, activity concentration and spatial resolution quantification.
 After the user has chosen the type of analysis, it will run the script for that analysis: QA_Volumes.py, QA_Activity.py or QA_Resolution.py. 
 A window will appear asking for the inputs necessary to run the script, which are:
 
- - Reference folder directory
+ - Reference folder directory.
 
- - Analysis folder directory
+ - Analysis folder directory.
 
- - For volume: voxel size in mm<sup>3</sup> for reference image and the N images
+ - For volume: voxel size in mm<sup>3</sup> for reference image and the N images.
 
- - For activity concentration: Reference image and N images study times
+ - For activity concentration: Reference image and N images study times.
  
  - Name of the excel file that the script will create with the results.
 
@@ -136,7 +136,6 @@ highest intensity inside the segmentation.
 ![fig3_nueva](https://user-images.githubusercontent.com/86127817/175782237-122fac9f-05b4-4d09-a734-f0553adaafff.png)
 
 
-
 The new segmentation is then saved as a NRRD file with the name format:
 
 TS_nameofsegmentation_nameofimage.nrrd
@@ -145,7 +144,6 @@ Its volume is also calculated and used to obtain the  volume recovery coefficien
 
 
 ![](https://latex.codecogs.com/svg.image?{\color{black}&space;RC_{VA}&space;=&space;\frac{Volume_{analysis}}{Volume_{reference}})
-
 
 
 The script will compute the RC<sub>VA</sub> for all original segmentations and all N images to analyse. Volumes and
@@ -169,9 +167,9 @@ motion compensated images to obtain RC<sub>VA</sub> for each segmentation and im
 
 The script will use each segmentation to calculate the mean intensity of two thresholds:
 
- - Background (Bg): Intensity lower to 40% of the highest intensity of the voxels inside the segmentation
+ - Background (Bg): Intensity lower to 40% of the highest intensity of the voxels inside the segmentation.
 
- - Activity (FDG): Intensity higher to 40% of the highest intensity of the voxels inside the segmentation
+ - Activity (FDG): Intensity higher to 40% of the highest intensity of the voxels inside the segmentation.
 
 It will save the Background as a segmentation and calculate the number of clusters (rods) in it. Each of the segmentations
 will be named as follows:
@@ -186,21 +184,21 @@ The script will calculate the number of rods recovery coefficient (RC<sub>R</sub
 
 It will save in an Excel file:
 
- - Mean Bg activity
+ - Mean Bg activity.
 
- - Mean FDG activity
+ - Mean FDG activity.
 
- - Contrast
+ - Contrast.
 
- - Contrast RC
+ - Contrast RC.
 
- - RC<sub>R</sub>
+ - RC<sub>R</sub>.
 
- - Number of rods
+ - Number of rods.
 
- - STD Bg
+ - STD Bg.
 
- - STD FDG
+ - STD FDG.
 
 In out application we used six segmentations around each of the rod sectors in the Flangeless Esser PET phantom to compare
 the number of rods detected per sector in the images acquired with motion compensation protocols with the rods per
