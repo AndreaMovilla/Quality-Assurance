@@ -6,9 +6,10 @@ This document provides an in-depth description of the package and its design cho
 
 ## Project description
 
-The purpose of this project is to evaluate PET image quality in terms of volume accuracy, activity concentration
-accuracy and spatial resolution, using phantoms. The project was originally applied to compare images with motion compensation.
+The purpose of this Python package is to evaluate PET image quality in terms of volume accuracy, activity concentration
+accuracy and spatial resolution, using phantoms. The package was originally applied to compare images with motion compensation.
 However, other possible applications include quality comparisons among different systems, or different reconstruction techniques.
+
 
 ```mermaid
 
@@ -43,11 +44,11 @@ graph LR
     G
     end
 ```
-The project contains four blocks: User inputs, Register and Resampling, Folder organisation and Quality Assurance. 
-On User inputs the neccesary images to run the package are described. Register and Resampling explains the use of the
-input images to run Register_Resampling.py. Folder organisation shows the necesary organisation of the images used in 
-the next block, Quality assurance, where PET image quality analysis is explained. The dotted lines represent the inputs
-of Register and resampling, while the solid lines represent the inputs of Quality assurance.
+The workflow contains four blocks: User inputs, Register and Resampling, Folder organization and Quality Assurance. 
+On User inputs the necessary images to run the package are described. Register and Resampling explains the use of the
+input images to run Register_Resampling.py. Folder organization shows the necessary organization of the images used in 
+the next block, Quality Assurance, where PET image quality analysis is explained. The dotted lines represent the inputs
+of Register and Resampling, while the solid lines represent the inputs of Quality Assurance. 
 # Input requirements
  To run this package, the user needs:
 
@@ -80,11 +81,15 @@ style E fill:#00,stroke:#333,stroke-width:0px
 Register and Resampling is the previous step to Quality Assurance. Register_Resampling.py
 is first used to register the N images to analyse to the reference image (register option). If the images have different
 size than the reference image, then the segmentations must be resampled to one of the images to analise (resampling option).
-For both types of analysis, a window will appear asking for:
+With Register_Resampling.py an emergent window will appear asking the user to choose between Register ans Resampling options. 
+Then it will run the script for the option chosen, Automatic_registration.py or Automatic_resampling.py. For both scripts,
+a window will appear asking for:
 
  - Image directory (reference image for register/analysis image for resampling)
 
  - Register or resampling folder directory (PET for register/Reference_segmentations for resampling)
+
+The functions needed to run the scripts are un QA_functions.py and ARR_functions.py.
 ## Folder organisation
 All the images and segmentations must be in NRRD format. For the analysis ahead, the images must be filed as follows:
 ```mermaid
@@ -106,7 +111,8 @@ style F fill:#00,stroke:#333,stroke-width:0px
 While the reference and analysis folder can have any name desired, the PET and Reference_segmentations folders must be named as stated.
 ## Quality assurance
 With Quality_Assurance.py the user can choose between volume, activity concentration and spatial resolution quantification.
-The inputs necessary to run this script are:
+After the user has chosen the type of analysis, it will run the script for that analysis: QA_Volumes.py, QA_Activity.py or QA_Resolution.py. 
+A window will appear asking for the inputs necessary to run the script, which are:
 
  - Reference folder directory
 
@@ -115,15 +121,17 @@ The inputs necessary to run this script are:
  - For volume: voxel size in mm<sup>3</sup> for reference image and the N images
 
  - For activity concentration: Reference image and N images study times
+ 
  - Name of the excel file that the script will create with the results.
 
+The functions needed to run the scripts are in QA_functions.py.
 # Volume quantification
 
 The script will obtain the volume of the VOIs inside each segmentation user-created, for all segmentations and
 all images. The volume of each VOI is obtained by applying a region growing algorithm [1] with a threshold to the image
 voxels inside the segmentation [2-4]. The threshold value used is the 40% of the mean of all voxels inside the segmentation with
-intensity higher than the 70% of the maximum intensity. The seed of the region growing algorithm is the voxel with
-highest intensity of the segmentation.
+intensity higher than the 70% of the maximum intensity. The seed of the region growing algorithm is the voxel with the
+highest intensity inside the segmentation.
 
 ![fig3_nueva](https://user-images.githubusercontent.com/86127817/175782237-122fac9f-05b4-4d09-a734-f0553adaafff.png)
 
@@ -198,7 +206,6 @@ In out application we used six segmentations around each of the rod sectors in t
 the number of rods detected per sector in the images acquired with motion compensation protocols with the rods per
 sector in the reference image.
 
-The complete workflow is shown in the next figure:
 
 
  ## References
