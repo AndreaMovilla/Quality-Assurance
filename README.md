@@ -1,36 +1,72 @@
 # Quality-Assurance
-Test repository for Quality Assurance                                         
-————————————————————————————————————————————————————————————
+                                      
+---
 
 — - - https://github.com/AndreaMovilla/Quality-Assurance - - - 
 
 > A package containing tools for automatic quantification analysis of PET images.
 > 
-————————————————————————————————————————————————————————————
+---
 
 REFERENCES:
 
-————————————————————————————————————————————————————————————
+---
 
 AUTHOR: Andrea Martínez Movilla <movillandrea@gmail.com>
 
-————————————————————————————————————————————————————————————
+---
 
 HISTORY:
 
 Version 1.0: February 2022
 
-————————————————————————————————————————————————————————————
+---
+```mermaid
 
-This package was created using Python 3.7 in the integrated development environment PyCharm. It contains 2 folders:
+graph LR
+    
+A[Reference image in NRRD format]-.-D[Registration]
+E[Images to analize in NRRD format]-.-C[Resampling]
+B[User segmentations over reference image]
+
+
+B-.-C
+E-.-D
+C-->1[Resampled segmentations]
+D-->2[Registered images to analyze]
+B-->F
+A -->F["PET <br> Reference_segmentations<br> (Without movemen image and segmentations)"]
+F-->G[Volume<br> Activity concentration <br> Spatial resolution]
+2-->H["PET <br> Reference_segmentations <br> (Analysis images and segmentations)"]
+1-->H
+H-->G
+
+subgraph User inputs
+A & B & E 
+end
+subgraph Register and resampling
+C & D & 1 & 2
+end
+subgraph Folder organization
+F & H 
+end
+subgraph Quality Assurance
+G 
+end
+```
+
+
+The code on this repository is organized in four blocks: User inputs, Register and Resampling, Folder organization and Quality Assurance. On User inputs the neccesary images to run the package are described. Register and Resampling explains the use of the input images to run Register_Resampling.py. Folder organization shows the necesary organization of the images used in the next block, Quality assurance, where PET image quality analysis is explained. The dotted lines represent the inputs of Register and resampling, while the solid lines represent the inputs of Quality assurance. Everything is explained in the file called "Aditional documentation".
+
+This package was created using Python 3.7. It contains 2 folders:
 
 1. ‘Automatic registration and resampling’: Python scripts to perform automatic registration and resampling of several PET images images at once .
 	
-	-R&R.py: script that runs the type of analysis desired: register or resampling
+	-Register_Resampling.py: script that runs the type of analysis desired: register or resampling
 
 	-ARR_funtions.py: file containing all the functions used in the scripts of this folder.
 
-	-Automatic_registration.py: Script to perform a basic automatic registration of images contained in a specific 	folder. Given reference fixed image and 	folder of moving images, it provides registered moving images and the 	transforms used for each one of them.
+	-Automatic_registration.py: Script to perform a basic automatic registration of images contained in a specific 	folder. Given reference fixed image and 	folder of moving images, it provides registered moving images and the 	transforms used for each one of them. 
 
 	-Automatic_resampling.py: Script to perform a basic automatic resampling of segmentations contained in a specific folder. Given already registered image and 	     folder of segmentations, it provides resampled 	segmentations.
 
@@ -44,12 +80,12 @@ This package was created using Python 3.7 in the integrated development environm
 
 	-QA_functions.py: file containing all the functions used in the scripts of this folder.
 	
-	-QA_Volumes.py: script to perform volume quantification analysis. Given reference segmentations and images of moving and static studies, it provides 		volume segmentations obtained with a growing region algorithm. Creates and XLSX file with the volumes (in ml) of each segmentation and the recovery 		coefficient of said volumes (RC=Vol_moving/Vol_static).
+	-QA_Volumes.py: script to perform volume quantification analysis. Given reference segmentations and images of moving and static studies, it provides 		volume segmentations obtained with a growing region algorithm. Creates and XLSX file with the volumes (in ml) of each segmentation and the recovery 		coefficient of said volumes ($RC_{VA}=\frac{Vol_{moving}}{Vol_{static}}$).
 
-	-QA_Activity.py: script to perform activity concentration quantification analysis. Given reference segmentations and images for moving and static studies, 	   it provides the activity concentration of each segmentation and its recovery coefficient (RC=A_moving/A_static)
+	-QA_Activity.py: script to perform activity concentration quantification analysis. Given reference segmentations and images for moving and static studies, 	   it provides the activity concentration of each segmentation and its recovery coefficient ($RC_{CA}=\frac{A_{moving}}{A_{static}}$)
 	
 
-	-QA_Resolution.py: script to perform resolution quantification analysis. Given one-plane reference segmentations of rod sectors , and images for moving and 	    static studies, it provides the contrast (C) of each sector and the number of rods recovery coefficient (RC=Rods_moving/Rods_static)
+	-QA_Resolution.py: script to perform resolution quantification analysis. Given one-plane reference segmentations of rod sectors , and images for moving and 	    static studies, it provides the contrast (C) of each sector and the number of rods recovery coefficient ($RC_R=\frac{Rods_{moving}}{Rods_{static}}$)
 
 
 	Before running, it’s important to organize the directories as follows:
@@ -68,4 +104,4 @@ This package was created using Python 3.7 in the integrated development environm
 
 	To run ‘Quantification_analysis’: Install requirements.txt. Open and run Quantification_Analysis.py. An emergent window will appear. It will ask you to 	choose the type of analysis desired: volume, activity or resolution. Another emergent window will appear, asking for the input needed for the type of 		quantification chosen. After adding the input click “run”. It will automatically create in the script directory an output folder with the results obtained.
 	
-![mermaid-diagram-20220213192409](https://user-images.githubusercontent.com/86127817/153769055-42d43e79-5f2f-4f77-b295-a5a4a367aa83.png)
+
