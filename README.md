@@ -33,7 +33,7 @@ B[User segmentations over reference image]
 B-.-C
 E-.-D
 C-->1[Resampled segmentations]
-D-->2[Registered images to analyze]
+D-->2[Registered images to analyse]
 B-->F
 A -->F["PET <br> Reference_segmentations<br> (Without movemen image and segmentations)"]
 F-->G[Volume<br> Activity concentration <br> Spatial resolution]
@@ -47,7 +47,7 @@ end
 subgraph Register and resampling
 C & D & 1 & 2
 end
-subgraph Folder organization
+subgraph Folder organisation
 F & H 
 end
 subgraph Quality Assurance
@@ -56,7 +56,7 @@ end
 ```
 
 
-The code on this repository is organized in four blocks: User inputs, Register and Resampling, Folder organization and Quality Assurance. On User inputs the neccesary images to run the package are described. Register and Resampling explains the use of the input images to run Register_Resampling.py. Folder organization shows the necesary organization of the images used in the next block, Quality assurance, where PET image quality analysis is explained. The dotted lines represent the inputs of Register and resampling, while the solid lines represent the inputs of Quality assurance. Everything is explained in the file called "Aditional documentation".
+The code on this repository is organized in four blocks: User inputs, Register and Resampling, Folder organisation and Quality Assurance. On User inputs the neccesary images to run the package are described. Register and Resampling explains the use of the input images to run Register_Resampling.py. Folder organisation shows the necesary organisation of the images used in the next block, Quality assurance, where PET image quality analysis is explained. The dotted lines represent the inputs of Register and resampling, while the solid lines represent the inputs of Quality assurance. Everything is explained in the file called "Aditional documentation".
 
 This package was created using Python 3.7. It contains 2 folders:
 
