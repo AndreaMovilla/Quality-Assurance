@@ -1,8 +1,7 @@
-import os
 import tkinter as tk
 from tkinter import filedialog
-import nrrd
 
+# Create window
 master = tk.Tk()
 
 
@@ -23,18 +22,21 @@ reference = Path()
 def mycode():
 	import QA_functions as QA_functions
 	import pandas as pd
+	import os
+	import nrrd
 
 	#  Import data
 	global analysis, reference, e3, e4, e5, master
 	main_path = analysis.selected_directory
 	main_path_ref = reference.selected_directory
 	excelname = e3.get()
-	voxeldim = e4.get()
-	voxeldimref = e5.get()
+	voxeldim = int(e4.get())
+	voxeldimref = int(e5.get())
 	master.destroy()
+
 	#  Create output folder and change directories
 	d = os.path.dirname('QA_Volume')
-	p = r'Output_QA_Activity'.format(d)
+	p = r'Output_QA_Volume'.format(d)
 	try:
 		os.makedirs(p)
 	except OSError:
@@ -43,12 +45,13 @@ def mycode():
 
 	# Importing the images
 	segref = QA_functions.importnrrd(os.path.join(main_path_ref, 'Reference_segmentations'))
-	headerref = QA_functions.importheader(os.path.join(main_path_ref, 'Reference_segmentations'))
-	imageref = QA_functions.importnrrd(os.path.join(main_path_ref, 'PET'))[0]
+	headerref = QA_functions.importheader(os.path.join(main_path_ref, 'PET'))
+	imageref = QA_functions.importnrrd(os.path.join(main_path_ref, 'PET'))
+	#imageref = QA_functions.importnrrd(os.path.join(main_path_ref, 'PET'))[0]
 
 	seg = QA_functions.importnrrd(os.path.join(main_path, 'Reference_segmentations'))
 	seg_names = QA_functions.names(os.path.join(main_path, 'Reference_segmentations'))
-	header = QA_functions.importheader(os.path.join(main_path, 'Reference_segmentations'))
+	header = QA_functions.importheader(os.path.join(main_path, 'PET'))
 	images = QA_functions.importnrrd(os.path.join(main_path, 'PET'))
 	images_names = QA_functions.names(os.path.join(main_path, 'PET'))
 
@@ -58,9 +61,9 @@ def mycode():
 	dicref = {'Names': seg_names}
 	for i in range(0, len(segref)):
 		volumenref = QA_functions.thresholdseg(segref[i], imageref, voxeldimref)
-		filename = 'TS_' + seg_names[i] + '_' + 'static.nrrd'
+		filename = 'TS_' + seg_names[i] + '_' + 'WithoutMovement_.nrrd'
 		detached_header = False
-		header_ref = headerref[i]
+		header_ref = headerref
 		nrrd.write(filename, volumenref[1], header_ref, index_order='F')
 		volumenesref.append(round(volumenref[0], 2))
 	dicref['Static'] = volumenesref
@@ -75,29 +78,27 @@ def mycode():
 			volumen = QA_functions.thresholdseg(seg[i], images[j], voxeldim)
 			filename = 'TS_' + seg_names[i] + '_' + images_names[j] + '.nrrd'
 			detached_header = False
-			header_sg = header[i]
+			header_sg = header[j]
 			nrrd.write(filename, volumen[1], header_sg, index_order='F')
 			RC = round(volumen[0]/volumenesref[i], 2)
 			RCtotal.append(RC)
 			volumenes.append(round(volumen[0], 2))
 		dic[images_names[j]] = volumenes
 		dic2[images_names[j]] = RCtotal
-
 	# Saving results in xlsx file
 	writer = pd.ExcelWriter(excelname)
 	dfref = pd.DataFrame(data=dicref)
 	dfref = dfref.T
 	dfref.to_excel(writer, sheet_name="Static volume (ml)")
-
 	df1 = pd.DataFrame(data=dic)
 	df1 = df1.T
 	df1.to_excel(writer, sheet_name="Volumes (ml)")
-
 	df2 = pd.DataFrame(data=dic2)
 	df2 = df2.T
 	df2.to_excel(writer, sheet_name="CR")
 	writer.save()
-
+	os._exit(os.EX_OK)
+	
 
 master.title('QA Volume')
 tk.Label(master, text="Reference directory").grid(row=0)
@@ -124,9 +125,8 @@ e3.grid(row=2, column=1)
 e4.grid(row=3, column=1)
 e5.grid(row=4, column=1)
 e3.insert(-1, 'name.xlsx')
-e4.insert(-1, '8')
-e5.insert(-1, '64')
 
-tk.Button(master, text='Quit', command=master.quit).grid(row=6, column=1, sticky=tk.W, pady=4)
+
+tk.Button(master, text='Run', command=mycode).grid(row=6, column=1, sticky=tk.W, pady=4)
 
 tk.mainloop()
