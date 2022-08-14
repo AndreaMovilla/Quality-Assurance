@@ -5,6 +5,7 @@ import math
 import tkinter as tk
 from tkinter import filedialog
 import warnings
+import pandas as pd
 
 warnings.filterwarnings('ignore', category=RuntimeWarning)
 
@@ -48,11 +49,11 @@ def mycode():
     # Importing the images
     segref_names = QA_functions.names(os.path.join(main_path_ref, 'Reference_segmentations'))
     segref = QA_functions.importnrrd(os.path.join(main_path_ref, 'Reference_segmentations'))
-    headerref = QA_functions.importheader(os.path.join(main_path_ref, 'Reference_segmentations'))
-    imageref = QA_functions.importnrrd(os.path.join(main_path_ref, 'PET'))[0]
+    headerref = QA_functions.importheader(os.path.join(main_path_ref, 'PET'))
+    imageref = QA_functions.importnrrd(os.path.join(main_path_ref, 'PET'))
 
     seg = QA_functions.importnrrd(os.path.join(main_path, 'Reference_segmentations'))
-    header = QA_functions.importheader(os.path.join(main_path, 'Reference_segmentations'))
+    header = QA_functions.importheader(os.path.join(main_path, 'PET'))
     images = QA_functions.importnrrd(os.path.join(main_path, 'PET'))
     images_names = QA_functions.names(os.path.join(main_path, 'PET'))
 
@@ -79,8 +80,8 @@ def mycode():
     segrefvolume = []
     for i in range(0, len(segrefbool)):
         volume = QA_functions.threshold40(segrefbool[i], imageref)
-        filename = '40S_' + segref_names[i] + '_ref' + '.nrrd'
-        header_sg = headerref[i]
+        filename = 'BG_' + segref_names[i] + '_ref' + '.nrrd'
+        header_sg = headerref
         nrrd.write(filename, volume[0], header_sg, index_order='F')
         segrefvolume.append(volume[0])
         seg_holes_ref.append(volume[0])
@@ -102,7 +103,7 @@ def mycode():
     dicref['Rods per sector'] = ref_rods
     dicref['Static STD FDG (Bq per ml)'] = std_c_more_40_reftotal
     dicref['Static STD BG (Bq per ml)'] = std_c_less_40_reftotal
-
+    print(dicref)
     # Segmentations in 3 slices
     segtotal = []
     for i in range(0, len(seg)):
@@ -135,14 +136,14 @@ def mycode():
         rods = []
         for i in range(0, len(segBGbool)):
             volume = QA_functions.threshold40(segBGbool[i], images[j])
-            filename = '40S_' + segref_names[i] + '_' + images_names[j] + '.nrrd'
+            filename = 'BG_' + segref_names[i] + '_' + images_names[j] + '.nrrd'
             header_sg = header[i]
             nrrd.write(filename, volume[0], header_sg, index_order='F')
             c_more_40 = round(volume[1], 2)
             c_less_40 = round(volume[2], 2)
             std_more_40 = round(volume[3], 2)
             std_less_40 = round(volume[4], 2)
-                        contrast = round(c_more_40 / c_less_40, 2)
+            contrast = round(c_more_40 / c_less_40, 2)
             contrast_total.append(contrast)
             rods.append(round(volume[5], 2))
             rods_quotient = round((volume[5]/ref_rods[i]), 2)
@@ -161,43 +162,32 @@ def mycode():
         dicstd_FDG[images_names[j]] = std_c_more_40_total
         dic_volumes[images_names[j]] = rods_quotient_total
         dic_volumes_holes[images_names[j]] = rods
-
-    # Saving results in xlsx file
-
+     # Saving results in xlsx file
     writer = pd.ExcelWriter(excelname, engine='xlsxwriter')
-
     dfref = pd.DataFrame(data=dicref)
     dfref = dfref.T
     dfref.to_excel(writer, sheet_name="Static")
-
     df1 = pd.DataFrame(data=dicBG)
     df1 = df1.T
     df1.to_excel(writer, sheet_name="BG concentration (Bq per ml)")
-
     df2 = pd.DataFrame(data=dicFDG)
     df2 = df2.T
     df2.to_excel(writer, sheet_name="FDG concentration (Bq per ml)")
-
     df3 = pd.DataFrame(data=dic)
     df3 = df3.T
     df3.to_excel(writer, sheet_name="Contrast")
-
     df4 = pd.DataFrame(data=dic2)
     df4 = df4.T
     df4.to_excel(writer, sheet_name="Contrast CR")
-
     df5 = pd.DataFrame(data=dic_volumes)
     df5 = df5.T
     df5.to_excel(writer, sheet_name="Rod RC")
-
     df8 = pd.DataFrame(data=dic_volumes_holes)
     df8 = df8.T
     df8.to_excel(writer, sheet_name="Rods per sector")
-
     df6_std = pd.DataFrame(data=dicstd_BG)
     df6_std = df6_std.T
     df6_std.to_excel(writer, sheet_name="BG STD (Bq per ml)")
-
     df7_std = pd.DataFrame(data=dicstd_FDG)
     df7_std = df7_std.T
     df7_std.to_excel(writer, sheet_name="FDG STD (Bq per ml)")
@@ -226,5 +216,5 @@ e3.grid(row=2, column=1)
 e3.insert(-1, 'name.xlsx')
 
 
-tk.Button(master, text='run', command=mycode).grid(row=6, column=1, sticky=tk.W, pady=4)
+tk.Button(master, text='Run', command=mycode).grid(row=6, column=1, sticky=tk.W, pady=4)
 tk.mainloop()
