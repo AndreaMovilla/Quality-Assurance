@@ -12,6 +12,9 @@ The quality can be assessed in terms of volume accuracy, activity concentration 
 ---
 
 REFERENCES:
+If you use this package please cite us:
+
+Martinez-Movilla, A., Mix, M., Torres-Espallardo, I. et al. Comparison of protocols with respiratory-gated (4D) motion compensation in PET/CT: open-source package for quantification of phantom image quality. EJNMMI Phys 9, 80 (2022). https://doi.org/10.1186/s40658-022-00509-4
 
 ---
 
